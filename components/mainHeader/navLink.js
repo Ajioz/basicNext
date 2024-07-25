@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 const NavLink = ({ href, children }) => {
   const path = usePathname();
   return (
-    <Link href={href} className={path.startsWith(href) && "active"}>
+    <Link href={href} className={path.startsWith(href) ? "active" : undefined}>
       {children}
     </Link>
   );

@@ -1,7 +1,5 @@
 import { DUMMY_NEWS } from "@/dummy-news";
-import Image from "next/image";
 import { notFound } from "next/navigation";
-import React from "react";
 
 const InterceptedImagePage = ({ params }) => {
   const imageSlug = params.slug;
@@ -11,15 +9,12 @@ const InterceptedImagePage = ({ params }) => {
 
   return (
     <>
-      <h2>Intercepted</h2>
-      <div className="fullscreen-image">
-        <Image
-          src={`/images/news/${Item.image}`}
-          title={Item.title}
-          height={800}
-          width={1000}
-        />
-      </div>
+      <div className="modal-backdrop" />
+      <dialog className="modal" open>
+        <div className="fullscreen-image">
+          <img src={`/images/news/${Item.image}`} alt={Item.title} />
+        </div>
+      </dialog>
     </>
   );
 };

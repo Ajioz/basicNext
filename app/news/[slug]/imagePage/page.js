@@ -1,5 +1,4 @@
 import { DUMMY_NEWS } from "@/dummy-news";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -11,7 +10,7 @@ const ImagePage = ({ params }) => {
 
   return (
     <div className="fullscreen-image">
-      <Image src={`/images/news/${Item.image}`} title={Item.title} height={800} width={1000} />
+      <img src={`/images/news/${Item.image}`} alt={Item.title} />
     </div>
   );
 };
