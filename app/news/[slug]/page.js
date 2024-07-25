@@ -2,12 +2,12 @@ import React from 'react'
 
 const NewsDetails = ({params}) => {
   return (
-    <div>
+    <article>
       <h1>News Detail Page </h1>
       <main>
-        <p>News ID:{params.id}</p>
+        <p>{params.id}</p>
       </main>
-    </div>
+    </article>
   );
 }
 

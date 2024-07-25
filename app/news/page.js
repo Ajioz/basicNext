@@ -1,24 +1,28 @@
 import Link from "next/link";
+import { DUMMY_NEWS } from "@/dummy-news";
+import Image from "next/image";
 
-const About = () => {
+const NewsPage = () => {
   return (
     <>
+      <h1>News Page</h1>
       <ul className="news-list">
-        <li>
-          <Link href="/news/reels">News Reels</Link>
-          <br />
-        </li>
-        <li>
-          <Link href="/news/sport">Sport News</Link>
-          <br />
-        </li>
-        <li>
-          <Link href="/news/business">Business News</Link>
-          <br />
-        </li>
+        {DUMMY_NEWS.map(({ id, slug, title, image, date, content }) => (
+          <li key={id}>
+            <Link href={`/news/${slug}`}>
+              <Image
+                src={`/images/news/${image}`}
+                title={title}
+                width={500}
+                height={500}
+              />
+              <span>{title}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </>
   );
 };
 
-export default About;
+export default NewsPage;
