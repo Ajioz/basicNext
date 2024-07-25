@@ -1,13 +1,23 @@
 import Link from "next/link";
 
-
 const About = () => {
   return (
-    <main>
-      <Link href="/news/reels">News Reels</Link><br />
-      <Link href="/news/sport">Sport News</Link><br />
-      <Link href="/news/business">Business News</Link><br />
-    </main>
+    <>
+      <ul className="news-list">
+        <li>
+          <Link href="/news/reels">News Reels</Link>
+          <br />
+        </li>
+        <li>
+          <Link href="/news/sport">Sport News</Link>
+          <br />
+        </li>
+        <li>
+          <Link href="/news/business">Business News</Link>
+          <br />
+        </li>
+      </ul>
+    </>
   );
 };
 

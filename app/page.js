@@ -1,14 +1,7 @@
-import Link from "next/link";
-
-export default function Home() {
+export default function HomePage() {
   return (
-    <main>
-      <img src="/logo.png" alt="A server surrounded by magic sparkles." />
-      <h1>Welcome to News Reel!</h1>
-      <p>🔥 Let&apos;s get started! 🔥</p>
-      <p>
-        <Link href="/news">Get News</Link>
-      </p>
-    </main>
+    <div id="home">
+      <h1>Modern Dynamic News Hub</h1>
+    </div>
   );
 }
