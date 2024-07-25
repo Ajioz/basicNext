@@ -11,7 +11,7 @@ const ArchivePage = () => {
           <ul>
             {links.map((link) => (
               <li key={link}>
-                    <Link href={`/archive/${link}`}>{link }</Link>
+                <Link href={`/archive/${link}`}>{link}</Link>
               </li>
             ))}
           </ul>

@@ -1,11 +1,5 @@
 import Link from "next/link";
 
-// import NavLink from "./navLink";
-// import React from "react";
-// import style from "./header.module.css";
-// import HeaderBackground from "./headerBackground";
-// import logoImg from "@/assets/logo.png";
-// import Image from "next/image";
 
 const Header = () => {
   return (

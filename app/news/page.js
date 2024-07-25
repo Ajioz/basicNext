@@ -7,7 +7,7 @@ const NewsPage = () => {
     <>
       <h1>News Page</h1>
       <ul className="news-list">
-        {DUMMY_NEWS.map(({ id, slug, title, image, date, content }) => (
+        {DUMMY_NEWS.map(({ id, slug, title, image }) => (
           <li key={id}>
             <Link href={`/news/${slug}`}>
               <Image
