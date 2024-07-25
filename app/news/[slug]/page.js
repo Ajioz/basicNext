@@ -1,5 +1,6 @@
 import { DUMMY_NEWS } from "@/dummy-news";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -13,12 +14,14 @@ const NewsDetails = ({ params }) => {
   return (
     <article className="news-article">
       <header>
-        <Image
-          src={`/images/news/${Item.image}`}
-          title={Item.title}
-          width={100}
-          height={100}
-        />
+        <Link href={`/news/${Item.slug}/imagePage`}>
+          <Image
+            src={`/images/news/${Item.image}`}
+            title={Item.title}
+            width={100}
+            height={100}
+          />
+        </Link>
         <h1>{Item.title} </h1>
         <time dateTime={Item.date}>{Item.date}</time>
       </header>
