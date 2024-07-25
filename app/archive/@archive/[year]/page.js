@@ -1,16 +1,15 @@
 import React from "react";
-import { getAllNews } from "@/lib/news";
+import { getNewsForYear } from "@/lib/news";
 import { notFound } from "next/navigation";
 import NewsList from "@/components/newsList/NewsList";
 
 const FilteredNewsPage = ({ params }) => {
   const year = params.year;
-  const NewsReels = getAllNews();
-  const Item = NewsReels.filter((news) => news.date.split("-")[0] === year);
+  const Item = getNewsForYear(year);
 
   if (!Item) notFound();
 
-  return <NewsList Item={Item} />;
+  return <NewsList news={Item} />;
 };
 
 export default FilteredNewsPage;

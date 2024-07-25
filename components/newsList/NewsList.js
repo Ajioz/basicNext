@@ -1,22 +1,25 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
-const NewsList = ({Item}) => {
+const NewsList = ({ news }) => {
   return (
-    <article className="news-article">
-      <header>
-        <Image
-          src={`/images/news/${Item.image}`}
-          title={Item.title}
-          width={100}
-          height={100}
-        />
-        <h1>{Item.title} </h1>
-        <time dateTime={Item.date}>{Item.date}</time>
-      </header>
-      <p>{Item.content}</p>
-    </article>
+    <ul className="news-list">
+      {news.map(({ id, slug, title, image }) => (
+        <li key={id}>
+          <Link href={`/news/${slug}`}>
+            <Image
+              src={`/images/news/${image}`}
+              title={title}
+              width={500}
+              height={500}
+            />
+            <span>{title}</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
-}
+};
 
 export default NewsList;
