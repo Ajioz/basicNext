@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const NewsList = ({ news }) => {
+
   return (
     <ul className="news-list">
       {news.map(({ id, slug, title, image }) => (

@@ -1,16 +1,16 @@
-import { DUMMY_NEWS } from "@/dummy-news";
+import { getNewsItem } from "@/lib/news";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
-const NewsDetails = ({ params }) => {
+const NewsDetails = async({ params }) => {
   const newSlug = params.slug;
-  const Item = DUMMY_NEWS.find(
-    (item) => item.slug === newSlug
-  );
+  const Item = await getNewsItem(newSlug);
 
   if (!Item) notFound();
+
+  // console.log(Item)
   return (
     <article className="news-article">
       <header>

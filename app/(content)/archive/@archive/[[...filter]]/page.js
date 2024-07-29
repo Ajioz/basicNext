@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import NewsList from "@/components/newsList/NewsList";
 import {
   getAvailableNewsMonths,
@@ -9,50 +9,57 @@ import {
 import Link from "next/link";
 
 const numToMonth = {
-  1: "Jan",
-  2: "Feb",
-  3: "Mar",
-  4: "Apr",
-  5: "May",
-  6: "Jun",
-  7: "Jul",
-  8: "Aug",
-  9: "Sep",
+  "01": "Jan",
+  "02": "Feb",
+  "03": "Mar",
+  "04": "Apr",
+  "05": "May",
+  "06": "Jun",
+  "07": "Jul",
+  "08": "Aug",
+  "09": "Sep",
   10: "Oct",
   11: "Nov",
   12: "Dec",
 };
 
-const FilteredNewsPage = ({ params }) => {
-  const filter = params.filter;
-
-  const selectedYear = filter?.[0];
-  const selectedMonth = filter?.[1];
-
+const FilteredNews = async ({ year, month }) => {
   let news;
-  let links = getAvailableNewsYears();
-
-  if (selectedYear && !selectedMonth) {
-    news = getNewsForYear(selectedYear);
-    links = getAvailableNewsMonths(selectedYear);
-  }
-
-  if (selectedYear && selectedMonth) {
-    news = getNewsForYearAndMonth(selectedYear, selectedMonth);
-    links = [];
+  if (year && !month) {
+    news = await getNewsForYear(year);
+  } else if (year && month) {
+    news = await getNewsForYearAndMonth(year, month);
   }
 
   let newsContent = <p>Make a valid selection period to see news feed.</p>;
   if (news && news.length > 0) {
     newsContent = <NewsList news={news} />;
   }
+  return newsContent;
+};
+
+const FilteredNewsPage = async ({ params }) => {
+  const filter = params.filter;
+
+  const selectedYear = filter?.[0];
+  const selectedMonth = filter?.[1];
+
+  const availableYear = await getAvailableNewsYears();
+  let links = availableYear;
+
+  if (selectedYear && !selectedMonth) {
+    links = getAvailableNewsMonths(selectedYear);
+  }
+
+  if (selectedYear && selectedMonth) links = [];
+
+  const availableMonth = getAvailableNewsMonths(selectedYear);
 
   if (
-    (selectedYear && !getAvailableNewsYears().includes(Number(selectedYear))) ||
-    (selectedMonth &&
-      !getAvailableNewsMonths(selectedYear).includes(Number(selectedMonth)))
+    (selectedYear && !availableYear.includes(selectedYear)) ||
+    (selectedMonth && !availableMonth.includes(selectedMonth))
   ) {
-    throw new Error('Invalid filter!');
+    throw new Error("Invalid filter!");
   }
 
   return (
@@ -75,7 +82,9 @@ const FilteredNewsPage = ({ params }) => {
           </ul>
         </nav>
       </header>
-      {newsContent}
+      <Suspense>
+        <FilteredNews year={selectedYear} month={selectedMonth} />
+      </Suspense>
     </>
   );
 };
